@@ -67,7 +67,8 @@ class Stage{
     start(){
         this.update();
 
-        this.fighter1El.querySelector('.attackButton').addEventListener('click',)
+        this.fighter1El.querySelector('.attackButton').addEventListener('click', () => this.doAttack(fighter1, fighter2));
+        this.fighter2El.querySelector('.attackButton').addEventListener('click', () => this.doAttack(fighter2, fighter1));
     }
     update(){
         this.fighter1El.querySelector('.name').innerHTML = `${this.fighter1.name} - ${this.fighter1.life} HP`;
@@ -77,6 +78,10 @@ class Stage{
         this.fighter2El.querySelector('.name').innerHTML = `${this.fighter2.name} - ${this.fighter1.life} HP`;
         let f2Pct = (this.fighter1.life / this.fighter2.maxLife) * 100;
         this.fighter2El.querySelector('.bar').style.width = `${f2Pct}%`;
+    }
+
+    doAttack(attracking, attacked){
+
     }
 }
 
