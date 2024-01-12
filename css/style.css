@@ -1,16 +1,16 @@
-.fight_area{
+.fight--area{
     display: flex;
     gap: 20px;
 }
 #char, #monster{
     flex: 1;
 }
-.lifebar{
+.life--bar{
     height: 10px;
     border: 1px solid #333;
     border-radius: 5px;
 }
-.lifebar .bar{
+.life--bar .bar{
     height: inherit;
     background-color: red;
     border-radius: 5px;

@@ -26,7 +26,7 @@ class Knight extends Character{
     }
 }
 
-class Sorcerer extends Character{
+class Sourcerer extends Character{
     constructor(name){
         super(name);
         this.life = 80;
@@ -38,7 +38,7 @@ class Sorcerer extends Character{
 
 class LittleMonster extends Character{
     constructor(){
-        super('Little Monster');
+        super("Little Monster");
         this.life = 40;
         this.attack = 4;
         this.defense = 4;
@@ -48,7 +48,7 @@ class LittleMonster extends Character{
 
 class BigMonster extends Character{
     constructor(){
-        super('Big Monster');
+        super("Big Monster");
         this.life = 120;
         this.attack = 16;
         this.defense = 6;
@@ -68,43 +68,44 @@ class Stage{
     start(){
         this.update();
 
-        this.fighter1El.querySelector('.attackButton').addEventListener('click', () => this.doAttack(this.fighter1, this.fighter2));
-        this.fighter2El.querySelector('.attackButton').addEventListener('click', () => this.doAttack(this.fighter2, this.fighter1));
+        this.fighter1El.querySelector('.attack--button').addEventListener('click', () => this.doAttack(this.fighter1, this.fighter2));
+        this.fighter2El.querySelector('.attack--button').addEventListener('click', () => this.doAttack(this.fighter2, this.fighter1));
     }
+
     update(){
-        this.fighter1El.querySelector('.name').innerHTML = `${this.fighter1.name} - ${this.fighter1.life.toFixed(1)} HP`;
-        let f1Pct = (this.fighter1.life / this.fighter1.maxLife) * 100;
+        this.fighter1El.querySelector('.name').innerHTML = `${this.fighter1.name} - ${this.fighter1.life.toFixed(2)} HP`;
+        let f1Pct = (this.fighter1.life / this.fighter1.maxLife) * 100;    
         this.fighter1El.querySelector('.bar').style.width = `${f1Pct}%`;
 
-        this.fighter2El.querySelector('.name').innerHTML = `${this.fighter2.name} - ${this.fighter1.life.toFixed(1)} HP`;
-        let f2Pct = (this.fighter1.life / this.fighter2.maxLife) * 100;
+        this.fighter2El.querySelector('.name').innerHTML = `${this.fighter2.name} - ${this.fighter2.life.toFixed(2)} HP`;
+        let f2Pct = (this.fighter2.life / this.fighter2.maxLife) * 100;    
         this.fighter2El.querySelector('.bar').style.width = `${f2Pct}%`;
     }
 
     doAttack(attacking, attacked){
-        if(attacking.life <= 0 || attacked.life <=0){
-            this.log.addMessage("Atacando cachorro morto");
-            return;
-        } 
-        
+        if(attacking.life <= 0 || attacked.life <= 0){
+            this.log.addMessage("Atacando cachorro morto!");
+            return; 
+        }
+
         let attackFactor = (Math.random() * 2).toFixed(2);
         let defenseFactor = (Math.random() * 2).toFixed(2);
 
         let actualAttack = attacking.attack * attackFactor;
         let actualDefense = attacked.defense * defenseFactor;
-
+        
         if(actualAttack > actualDefense){
             attacked.life -= actualAttack;
-            this.log.addMessage(`${attacking.name} causou ${actualAttack.toFixed(2)} de dano a ${attacked.name}`)
+            this.log.addMessage(`${attacking.name} causou ${actualAttack.toFixed(2)} de dano em ${attacked.name}`);
         } else{
-            this.log.addMessage(`${attack.name} conseguiu defender...`);
+            this.log.addMessage(`${attacked.name} conseguiu defender...`);
         }
-        
+
         this.update();
-    }   
+    }
 }
 
-class log{
+class Log{
     list = [];
 
     constructor(listEl){
@@ -117,10 +118,14 @@ class log{
     }
 
     render(){
-        this.list.innerHTML = '';
-
+        this.listEl.innerHTML = '';
+        
         for(let i in this.list){
-            this.listEl.innerHTML += `<li>${this.list[i]}`
+            this.listEl.innerHTML += `<li>${this.list[i]}</li>`;
         }
     }
 }
+
+
+
+
